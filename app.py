@@ -65,6 +65,7 @@ def init_db():
         """)
 
 
+init_db()
 def now():
     return datetime.now().astimezone().isoformat(timespec="seconds")
 
