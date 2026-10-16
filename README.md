@@ -70,7 +70,7 @@ CampusCare turns plain-language complaints into clearer support tickets, recomme
    python app.py
    ```
 
-9. Open **http://127.0.0.1:5000** in your browser.
+9. Open **https://campuscareai-8z9e.onrender.com/** in your browser.
 
 The SQLite database `campuscare.db` is created automatically on first start. Keep the terminal open while using the app.
 
