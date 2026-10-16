@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusCare AI · Support, made clearer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" data-view="home">
+        <span class="brand-mark"><span>c</span></span>
+        <span><strong>CampusCare</strong><small>AI SUPPORT DESK</small></span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav>
+        <button class="nav-item active" data-view="home"><span class="nav-icon">⌂</span> Overview</button>
+        <button class="nav-item" data-view="tickets"><span class="nav-icon">▤</span> Ticket inbox <span class="nav-count" id="navCount">0</span></button>
+        <button class="nav-item" data-view="new"><span class="nav-icon">＋</span> Create a ticket</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="ai-card">
+          <div class="ai-orb">✦</div>
+          <strong>Clearer issues.<br>Faster resolutions.</strong>
+          <p>AI helps route requests to the right campus team.</p>
+        </div>
+        <div class="profile">
+          <div class="avatar">CC</div><div><strong>Campus support</strong><small>Local workspace</small></div>
+          <span class="profile-dots">···</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="crumb"><span>Workspace</span><span class="crumb-slash">/</span><strong id="crumbCurrent">Overview</strong></div>
+        <div class="top-actions"><span class="connection"><i id="connectionDot"></i><span id="connectionText">Checking API mode…</span></span><button class="icon-button" id="refreshBtn" title="Refresh">↻</button><div class="avatar small-avatar">CC</div></div>
+      </header>
+
+      <section class="view active" id="view-home">
+        <div class="welcome-row">
+          <div><div class="eyebrow">CAMPUS SUPPORT · INTELLIGENT ROUTING</div><h1>Good day. Let's get<br><span>things sorted.</span></h1><p class="intro">A clearer way to raise campus issues. Describe what happened; CampusCare helps turn it into a ticket the right team can act on.</p></div>
+          <div class="welcome-art"><div class="art-ring ring-one"></div><div class="art-ring ring-two"></div><div class="art-ticket"><span class="art-spark">✦</span><div class="art-line long"></div><div class="art-line"></div><div class="art-chip"></div><div class="art-check">✓</div></div><div class="floating-dot dot-a"></div><div class="floating-dot dot-b"></div></div>
+        </div>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-top"><span>Total tickets</span><span class="stat-icon violet">▤</span></div><strong id="statTotal">0</strong><small>All requests submitted</small></div>
+          <div class="stat-card"><div class="stat-top"><span>Awaiting action</span><span class="stat-icon amber">◷</span></div><strong id="statOpen">0</strong><small>Open support requests</small></div>
+          <div class="stat-card"><div class="stat-top"><span>In progress</span><span class="stat-icon blue">↗</span></div><strong id="statProgress">0</strong><small>Being handled by a team</small></div>
+          <div class="stat-card"><div class="stat-top"><span>Resolved</span><span class="stat-icon green">✓</span></div><strong id="statResolved">0</strong><small>Resolved or closed</small></div>
+        </div>
+        <div class="content-grid">
+          <section class="panel recent-panel">
+            <div class="panel-heading"><div><h2>Recent tickets</h2><p>A live view of your support queue</p></div><button class="text-button" data-view="tickets">View inbox <span>→</span></button></div>
+            <div id="recentTickets" class="ticket-list"><div class="empty-state">Loading tickets…</div></div>
+          </section>
+          <section class="panel insights-panel">
+            <div class="panel-heading"><div><h2>Support insights</h2><p>What needs attention</p></div><span class="insight-badge">LIVE</span></div>
+            <div class="priority-callout"><div class="priority-symbol">!</div><div><strong id="highPriority">0 high-priority</strong><p>High and urgent requests still open</p></div></div>
+            <h3 class="mini-heading">Requests by category</h3>
+            <div id="categoryBars" class="category-bars"><div class="muted">No data yet. Submit a ticket to get started.</div></div>
+            <button class="secondary-button full-button" data-view="new">＋ Create a support ticket</button>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-new">
+        <div class="page-heading"><div class="eyebrow">NEW SUPPORT REQUEST</div><h1>Tell us what’s <span>happening.</span></h1><p>Write it in your own words. AI will help organise the details and suggest where it belongs.</p></div>
+        <div class="form-layout">
+          <form id="ticketForm" class="panel form-panel">
+            <div class="form-section-title"><span class="step-number">01</span><div><h2>Your details</h2><p>So the support team knows who to contact</p></div></div>
+            <div class="form-row"><label>Full name<input name="name" placeholder="e.g. Alex Kumar" maxlength="120" required></label><label>Email address<input name="email" type="email" placeholder="you@college.edu" maxlength="180" required></label></div>
+            <label>Your role<select name="role"><option>Student</option><option>Faculty</option><option>Administrative staff</option><option>Other staff</option></select></label>
+            <div class="form-divider"></div>
+            <div class="form-section-title"><span class="step-number">02</span><div><h2>Describe the issue</h2><p>Include what happened and how it affects you</p></div></div>
+            <label>Short title<input name="title" id="issueTitle" placeholder="e.g. Unable to access student portal" maxlength="160" required minlength="4"></label>
+            <label>Issue description<textarea name="description" id="issueDescription" rows="5" maxlength="4000" minlength="10" placeholder="Explain the issue in your own words. What were you trying to do? What happened instead? Is there a deadline or impact?" required></textarea><span class="field-foot"><span>Be specific, but don't include passwords or sensitive personal data.</span><span id="charCount">0 / 4000</span></span></label>
+            <div class="ai-preview" id="aiPreview">
+              <div class="ai-preview-head"><span class="ai-mini-icon">✦</span><div><strong>AI issue analysis</strong><small id="analysisMode">Ready when you are</small></div><span class="preview-status" id="previewStatus">NOT RUN</span></div>
+              <p id="previewHint">Analyse your description to suggest a category, department and priority before submitting.</p>
+              <div id="analysisResult" class="analysis-result hidden"></div>
+            </div>
+            <div class="form-actions"><button type="button" class="secondary-button" id="analyzeBtn"><span>✦</span> Analyse with AI</button><button type="submit" class="primary-button" id="submitBtn">Submit ticket <span>→</span></button></div>
+            <div id="formMessage" class="form-message" role="status"></div>
+          </form>
+          <aside class="form-aside">
+            <div class="side-note"><div class="note-icon">✧</div><h3>Not sure how to categorise it?</h3><p>That's what the assistant is for. It reads your description and suggests the most relevant campus team.</p></div>
+            <div class="side-note muted-note"><div class="note-icon">⌁</div><h3>What happens next?</h3><ul><li>Your issue is organised into a clear ticket.</li><li>The right department is recommended.</li><li>You can track status from the ticket inbox.</li></ul></div>
+            <div class="privacy-note"><span>◈</span> Demo data is stored locally on this computer in SQLite.</div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-tickets">
+        <div class="page-heading tickets-heading"><div><div class="eyebrow">SUPPORT WORKSPACE</div><h1>Ticket <span>inbox.</span></h1><p>Search, review and update submitted campus issues.</p></div><button class="primary-button" data-view="new">＋ New ticket</button></div>
+        <div class="panel inbox-panel">
+          <div class="filters"><div class="search-wrap"><span>⌕</span><input id="searchInput" placeholder="Search tickets, names or ID…"></div><select id="statusFilter"><option value="">All statuses</option><option>Open</option><option>In Progress</option><option>Resolved</option><option>Closed</option></select><select id="categoryFilter"><option value="">All categories</option></select></div>
+          <div class="table-wrap"><table><thead><tr><th>TICKET</th><th>REQUESTER</th><th>CATEGORY / DEPARTMENT</th><th>PRIORITY</th><th>STATUS</th><th>CREATED</th><th></th></tr></thead><tbody id="ticketTableBody"><tr><td colspan="7" class="empty-state">Loading…</td></tr></tbody></table></div>
+          <div class="table-foot"><span id="ticketCountText">0 tickets</span><span>Showing up to 200 recent tickets</span></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <div class="modal-backdrop hidden" id="ticketModal">
+    <div class="modal">
+      <div class="modal-top"><div><span class="eyebrow" id="modalTicketId">TICKET</span><h2 id="modalTitle">Ticket details</h2></div><button class="icon-button" id="closeModal" aria-label="Close">×</button></div>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
