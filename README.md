@@ -118,8 +118,9 @@ CampusCareAI/
 - `PATCH /api/tickets/<id>` — update ticket status and priority
 - `GET /api/stats` — dashboard metrics
 
-## Important prototype limitations
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/bb70df86-7d90-4c3c-9b0e-88a702a42578" />
+## prototype screenshot
+<img width="1903" height="974" alt="image" src="https://github.com/user-attachments/assets/37f813ac-1753-4c31-aca0-eb36e9647248" />
+
 
 
 - This is a local college demo, not a production helpdesk. It does not include authentication/role-based access, email notifications, college SSO, or real ticket dispatch to campus departments.
