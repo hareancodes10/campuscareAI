@@ -119,6 +119,8 @@ CampusCareAI/
 - `GET /api/stats` — dashboard metrics
 
 ## Important prototype limitations
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/bb70df86-7d90-4c3c-9b0e-88a702a42578" />
+
 
 - This is a local college demo, not a production helpdesk. It does not include authentication/role-based access, email notifications, college SSO, or real ticket dispatch to campus departments.
 - The ticket inbox is an admin-style demo interface and is not protected by login. Do not expose it publicly with real student information.
